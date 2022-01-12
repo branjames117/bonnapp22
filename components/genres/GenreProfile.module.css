@@ -1,0 +1,29 @@
+.genre:not(:first-child)::before {
+  content: ' • ';
+}
+
+.listSplitter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 200px;
+  padding: 25px 0;
+}
+
+@media screen and (max-width: 600px) {
+  .listSplitter {
+    gap: 100px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .listSplitter {
+    gap: 40px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .listSplitter {
+    gap: 0px;
+  }
+}

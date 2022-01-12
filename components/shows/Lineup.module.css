@@ -1,0 +1,283 @@
+.day {
+  letter-spacing: -4px;
+  color: white;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 10px;
+}
+
+.day:not(:first-child) {
+  padding-top: 35px;
+}
+
+.headliner span {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.headliner span:not(:first-child)::before {
+  content: ' ';
+}
+
+.headliner span:hover {
+  color: yellow;
+}
+
+.darkHeadliner span {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.darkHeadliner span:not(:first-child)::before {
+  content: ' ';
+}
+
+.darkHeadliner span:hover {
+  color: #fff;
+}
+
+.subliner span {
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.subliner span:not(:first-child)::before {
+  content: ' • ';
+}
+
+.subliner span:hover {
+  color: rgb(59, 131, 224);
+}
+
+.darkSubliner span {
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.darkSubliner span:not(:first-child)::before {
+  content: ' • ';
+}
+
+.darkSubliner span:hover {
+  color: #fff;
+}
+
+.dark,
+.dark:hover {
+  color: #ddd;
+}
+
+.dark span,
+.thursday span,
+.friday span,
+.saturday span,
+.sunday span,
+.who span {
+  cursor: pointer;
+}
+
+.dark span:not(:first-child)::before,
+.thursday span:not(:first-child)::before,
+.friday span:not(:first-child)::before,
+.saturday span:not(:first-child)::before,
+.sunday span:not(:first-child)::before,
+.who span:not(:first-child)::before {
+  content: ' • ';
+}
+
+.dark span:hover {
+  color: white;
+}
+
+.thursday span:nth-child(even) {
+  color: yellow;
+}
+
+.thursday span:nth-child(odd) {
+  color: rgb(215, 88, 231);
+}
+
+.thursday span:hover {
+  color: rgb(255, 155, 41);
+}
+
+.friday span:nth-child(even) {
+  color: rgb(88, 226, 111);
+}
+
+.friday span:nth-child(odd) {
+  color: rgb(59, 131, 224);
+}
+
+.friday span:hover {
+  color: rgb(215, 88, 231);
+}
+
+.saturday span:nth-child(even) {
+  color: rgb(215, 88, 231);
+}
+
+.saturday span:nth-child(odd) {
+  color: rgb(88, 226, 111);
+}
+
+.saturday span:hover {
+  color: rgb(255, 155, 41);
+}
+
+.sunday span:nth-child(even) {
+  color: rgb(255, 155, 41);
+}
+
+.sunday span:nth-child(odd) {
+  color: rgb(88, 226, 111);
+}
+
+.sunday span:hover {
+  color: yellow;
+}
+
+.who span:nth-child(even) {
+  color: rgb(255, 155, 41);
+}
+
+.who span:nth-child(odd) {
+  color: yellow;
+}
+
+.who span:hover {
+  color: rgb(59, 131, 224);
+}
+
+.blue {
+  color: rgb(59, 131, 224);
+}
+
+.green {
+  color: rgb(88, 226, 111);
+}
+
+.pink {
+  color: rgb(215, 88, 231);
+}
+
+.orange {
+  color: rgb(255, 155, 41);
+}
+
+.yellow {
+  color: yellow;
+}
+
+.innerContainer {
+  padding: 15px 100px 45px;
+}
+
+.container {
+  text-align: center;
+  display: grid;
+  flex: 1;
+  grid-template-columns: 1200px;
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    grid-template-columns: 768px;
+  }
+  .innerContainer {
+    padding: 0 0 45px;
+  }
+}
+
+/* ipad pro */
+@media screen and (max-width: 1024px) {
+  .container {
+    grid-template-columns: 768px;
+  }
+}
+
+/* ipad */
+@media screen and (max-width: 768px) {
+  .container {
+    grid-template-columns: 768px;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .container {
+    grid-template-columns: 540px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    grid-template-columns: 500px;
+  }
+}
+
+/* surface duo */
+@media screen and (max-width: 540px) {
+  .container {
+    grid-template-columns: 540px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .container {
+    grid-template-columns: 440px;
+  }
+}
+
+/* iphone 6/7/8 plus */
+@media screen and (max-width: 414px) {
+  .container {
+    grid-template-columns: 414px;
+  }
+}
+
+/* pixel 2 */
+@media screen and (max-width: 411px) {
+  .container {
+    grid-template-columns: 411px;
+  }
+}
+
+/* iphone 6/7/8/X */
+@media screen and (max-width: 375px) {
+  .container {
+    grid-template-columns: 375px;
+  }
+}
+
+/* galaxy s5 */
+@media screen and (max-width: 360px) {
+  .container {
+    grid-template-columns: 360px;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .container {
+    grid-template-columns: 320px;
+  }
+}
+
+/* iphone 5 */
+@media screen and (max-width: 320px) {
+  .container {
+    grid-template-columns: 320px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .container {
+    grid-template-columns: 280px;
+  }
+}
+
+/* galaxy fold */
+@media screen and (max-width: 280px) {
+  .container {
+    grid-template-columns: 280px;
+  }
+}

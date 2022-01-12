@@ -1,0 +1,101 @@
+.comments {
+  padding: 5px;
+}
+
+.replies {
+  padding: 5px 5px 5px 25px;
+}
+
+.comment {
+  border-radius: 5px;
+  margin-top: 15px;
+  background-color: rgba(255, 0, 242, 0.2);
+  padding: 0 18px 15px 18px;
+}
+
+.darkComment {
+  border-radius: 5px;
+  margin-top: 15px;
+  background-color: #ddd;
+  color: black;
+  padding: 0 18px 15px 18px;
+}
+
+.reply {
+  border-radius: 5px;
+  margin: 15px 0 0 45px;
+  background-color: rgba(255, 0, 242, 0.2);
+  padding: 0 18px 15px 18px;
+  position: relative;
+}
+
+.darkReply {
+  border-radius: 5px;
+  margin: 15px 0 0 45px;
+  background-color: #ddd;
+  color: black;
+  padding: 0 18px 15px 18px;
+}
+
+.darkComment .commentAuthor a,
+.darkReply .commentAuthor a {
+  color: black;
+}
+
+.commentBody {
+  padding: 5px;
+  width: 100%;
+  word-wrap: break-word;
+  display: inline-block;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 420px) {
+  .comment {
+    padding: 0;
+  }
+  p.commentBody {
+    margin: 2px;
+  }
+}
+
+.commentAuthor {
+  text-align: right;
+}
+
+.commentAuthor:before {
+  content: 'posted by ';
+  font-size: 0.7rem;
+}
+
+.commentTimestamp {
+  font-size: 0.8rem;
+}
+
+.btn {
+  background-color: rgb(255, 155, 41);
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 4px;
+  margin-left: 4px;
+  transition: 0.1s linear;
+  font: inherit;
+  cursor: pointer;
+}
+
+.darkBtn {
+  background-color: black;
+  color: #ddd;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 4px;
+  margin-left: 4px;
+  transition: 0.1s linear;
+  font: inherit;
+  cursor: pointer;
+}
+
+.btn:hover,
+.darkBtn:hover {
+  transform: scale(0.95);
+}

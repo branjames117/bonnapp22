@@ -1,0 +1,202 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 2.2rem;
+  letter-spacing: -4px;
+  text-transform: uppercase;
+}
+
+.navLinkList li {
+  display: inline;
+  padding: 0 10px;
+}
+
+.navLogo {
+  text-shadow: 0px 0px 10px;
+}
+
+.navLink {
+  cursor: pointer;
+  text-shadow: 0px 0px 10px;
+  transition: text-shadow 0.1s linear;
+}
+
+.navLink:hover {
+  text-shadow: 3px 3px 10px;
+}
+
+.miniMenu {
+  cursor: pointer;
+  display: none;
+}
+
+.miniMenu:hover .line {
+  box-shadow: 1px 1px 5px;
+}
+
+.hamburger .line:not(:first-child) {
+  margin-top: 7px;
+}
+
+.line {
+  box-shadow: 0px 0px 5px;
+  height: 4px;
+  width: 40px;
+  transition: 0.25s;
+}
+
+.line1.active {
+  -webkit-transform: rotate(-45deg) translate(-8px, 6px);
+  transform: rotate(-45deg) translate(-8px, 6px);
+}
+
+.line2.active {
+  opacity: 0;
+}
+
+.line3.active {
+  -webkit-transform: rotate(42deg) translate(-9px, -8px);
+  transform: rotate(42deg) translate(-9px, -8px);
+}
+
+.slideMenu {
+  background-color: rgba(0, 0, 0, 75%);
+  position: absolute;
+  padding: 0 20px 100vh 0;
+  opacity: 0;
+  right: 0;
+  left: 0;
+  pointer-events: none;
+  transform: translateY(100px);
+  transition: 0.25s linear;
+}
+
+.slideMenu.active {
+  transform: translateY(0);
+  opacity: 100;
+  pointer-events: auto;
+}
+
+.slideMenu .navLinkList li {
+  display: block;
+  text-align: right;
+}
+
+/* header width responsiveness needs to be in its own separate CSS
+file because of the fixed positioning, it won't respond along with
+the site's grid CSS even though its contained within */
+
+.header {
+  background-color: rgba(0, 0, 0, 75%);
+  position: fixed;
+  top: 0;
+  padding: 0 22px;
+  width: 1200px;
+  z-index: 100;
+}
+
+@media screen and (min-width: 1201px) {
+  .slideMenu {
+    display: none;
+  }
+}
+
+/* ipad pro */
+@media screen and (max-width: 1200px) {
+  .fullMenu {
+    display: none;
+  }
+  .miniMenu {
+    display: inline-flex;
+  }
+  .header {
+    width: 768px;
+  }
+}
+
+/* ipad */
+@media screen and (max-width: 768px) {
+  .header {
+    width: 768px;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .header {
+    width: 540px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    width: 500px;
+  }
+}
+
+/* surface duo */
+@media screen and (max-width: 540px) {
+  .header {
+    width: 540px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .header {
+    width: 440px;
+  }
+}
+
+/* iphone 6/7/8 plus */
+@media screen and (max-width: 414px) {
+  .header {
+    width: 414px;
+  }
+}
+
+/* pixel 2 */
+@media screen and (max-width: 411px) {
+  .header {
+    width: 411px;
+  }
+}
+
+/* iphone 6/7/8/X */
+@media screen and (max-width: 375px) {
+  .header {
+    width: 375px;
+  }
+}
+
+/* galaxy s5 */
+@media screen and (max-width: 360px) {
+  .header {
+    width: 360px;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .header {
+    width: 320px;
+  }
+}
+
+/* iphone 5 */
+@media screen and (max-width: 320px) {
+  .header {
+    width: 320px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .header {
+    width: 280px;
+  }
+}
+
+/* galaxy fold */
+@media screen and (max-width: 280px) {
+  .header {
+    width: 280px;
+  }
+}
