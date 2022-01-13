@@ -1,15 +1,15 @@
-import { useContext } from 'react'
-import { ThemeContext } from '../layout/ThemeContext'
-import { useSession } from 'next-auth/client'
-import Link from 'next/link'
-import Card from '../layout/Card'
-import BigHeadline from '../layout/BigHeadline'
-import Headline from '../layout/Headline'
-import randomImageGenerator from '../../lib/random-images'
+import { useContext } from 'react';
+import { ThemeContext } from '../layout/ThemeContext';
+import { useSession } from 'next-auth/client';
+import Link from 'next/link';
+import Card from '../layout/Card';
+import BigHeadline from '../layout/BigHeadline';
+import Headline from '../layout/Headline';
+import randomImageGenerator from '../../lib/random-images';
 
 export default function Home() {
-  const { darkTheme } = useContext(ThemeContext)
-  const [session, loading] = useSession()
+  const { darkTheme } = useContext(ThemeContext);
+  const [session, loading] = useSession();
 
   return (
     <>
@@ -17,15 +17,15 @@ export default function Home() {
         <Card>
           <BigHeadline>
             {!session ? (
-              <>Welcome to BonnApp21</>
+              <>Welcome to BonnApp22</>
             ) : (
-              <>Welcome Back to BonnApp21</>
+              <>Welcome Back to BonnApp22</>
             )}
           </BigHeadline>
 
           <Headline>What It Is</Headline>
           <p>
-            This is an unofficial Bonnaroo 2021 festival companion app, built
+            This is an unofficial Bonnaroo 2022 festival companion app, built
             from the ground up as a labor of love and provided to all
             Bonnaroovians.
           </p>
@@ -57,10 +57,9 @@ export default function Home() {
               the shows you most want to see.
             </p>
             <p>
-              If you're going to Bonnaroo 2021 in September, and you don't want
-              to waste tedious hours researching each individual show, then
-              don't. The hard work has been done for you, and it's all right
-              here.
+              If you're going to Bonnaroo 2022 in June, and you don't want to
+              waste tedious hours researching each individual show, then don't.
+              The hard work has been done for you, and it's all right here.
             </p>
           </Card>
         ) : (
@@ -86,66 +85,17 @@ export default function Home() {
       <div>
         <Card>
           <Headline>Breaking News</Headline>
-          <h3> + + + 24 October 2021 + + + </h3>
+          <h3> + + + 12 January 2022 + + + </h3>
           <p>
-            Well, at this point it's not news, but Bonnaroo 2021 was cancelled
-            for muddy campground conditions! Since then, I've been working
-            through the Vanderbilt Coding Boot Camp, developing my portfolio and
-            hard skills in the hopes of turning this web development passion of
-            mine into an actual career. I'll keep this website live, along with
-            the database storing user information, for posterity's sake. And
-            when Bonnaroo 2022 rolls around next year, the new-and-improved
-            BonnApp22 will be ready and waiting.
+            Welcome back to BonnApp! Last year turned out to be a bust due to
+            muddy conditions forcing the campgrounds to shut down. But this
+            year, we're back to a June festival, unless the country goes into
+            lockdown! This is a carbon copy of the previous app, but connected
+            to a new database of users, shows, and genres. The database isn't
+            fully populated, so expect a lot of links to be broken for now,
+            especially on the Lineup page.
           </p>
-          <p>See you then!</p>
-          <h3> + + + 13 August 2021 + + + </h3>
-          <p>
-            Show times have been revealed and the BonnApp database has been
-            updated accordingly. I've also switched over from using a 24-hour
-            time format to the more U.S.-familiar 12-hour format, to improve the
-            readability of the schedule. Again, as a reminder, be sure to
-            screenshot your schedule before you get out there and find this app
-            inaccessible due to poor network availability. As a final change, I
-            made the lineup page the root route, since that's what everyone
-            wants to see when they come here anyway.
-          </p>
-          <h3> + + + 5 August 2021 + + + </h3>
-          <p>
-            There have been a few more lineup changes. Blossom and Zach Bryan
-            will be there on Thursday, with Spock stepping out. Mastodon will be
-            there on Friday. No changes to Saturday or Sunday.
-          </p>
-          <p>
-            Furthermore, the "special guests" featured in Thursday's Grand Ole
-            Opry performance have been revealed: Tommy Emmanuel, Dom Flemons,
-            Chris Janson, Amythyst Kiah, Riders in the Sky, Maggie Rose, The
-            Travelin' McCourys, and Chris Shiflett, plus the Opry Square Dancers
-            and announcer Bill Cody. These performers will not get individual
-            pages in the database, but they will be referenced on Grand Ole
-            Opry's. For more information on each guest, hit that Google box.
-          </p>
-          <p>
-            This app is more or less finished as far as features go, but when
-            the official showtimes are released, along with stages, I'll upload
-            the database, and that information will automatically appear in the{' '}
-            <strong>Your Show Schedule</strong> section of your profile for each
-            performer you're following. This should help you plan your days on
-            the Farm and handle any scheduling conflicts that might arise.
-            Internet connections are shoddy out there, so be sure to take a
-            screenshot of your schedule for later reference, because you likely
-            won't be able to reach this website out in the boondocks of
-            Manchester.
-          </p>
-          <h3> + + + 9 July 2021 + + + </h3>
-          <p>
-            Well, there were some lineup changes, so I've had to modify the
-            database. The big changes are as follows: Rufus du Sol replaces Lana
-            Del Rey, Khruangbin replaces Deftones, and Janelle Monae, King
-            Gizzard & the Lizard Wizard, and Nubya Garcia are all out for
-            reasons unknown. The other change is that everyone who was
-            previously only performing on the Who Stage have now been given
-            dates and are added to the regular lineup.
-          </p>
+          <p>See you soon!</p>
         </Card>
         <Card>
           <Headline>How Was It Made</Headline>
@@ -162,12 +112,12 @@ export default function Home() {
             MongoDB, and Extended JavaScript.
           </p>
           <p>
-            For BonnApp21, I taught myself React and Next and also strengthened
-            my grasp of MongoDB. Inspiration for the project came from the holy
-            annual ritual of researching dozens of new artists I've never heard
-            of for the purpose of planning my Bonnaroo experience. In the amount
-            of time it might normally have taken me to perform this research, I
-            built this app instead.
+            For BonnApp21, this app's predecessor, I taught myself React and
+            Next and also strengthened my grasp of MongoDB. Inspiration for the
+            project came from the holy annual ritual of researching dozens of
+            new artists I've never heard of for the purpose of planning my
+            Bonnaroo experience. In the amount of time it might normally have
+            taken me to perform this research, I built this app instead.
           </p>
         </Card>
         {!loading && (
@@ -201,5 +151,5 @@ export default function Home() {
         </Card>
       </div>
     </>
-  )
+  );
 }
