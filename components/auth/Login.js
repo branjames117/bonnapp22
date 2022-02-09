@@ -1,45 +1,51 @@
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
-import { signIn } from 'next-auth/client'
-import Card from '../layout/Card'
-import Button from '../layout/Button'
-import Link from 'next/link'
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { signIn } from 'next-auth/client';
+import Card from '../layout/Card';
+import Button from '../layout/Button';
+import Link from 'next/link';
 
 export default function Login() {
-  const [userData, setUserData] = useState({ username: '', password: '' })
-  const [usernameExists, setUsernameExists] = useState()
-  const [passwordIncorrect, setPasswordIncorrect] = useState()
-  const [formSubmitted, setFormSubmitted] = useState()
-  const [APIError, setAPIError] = useState()
-  const [loading, setLoading] = useState(false)
+  const [userData, setUserData] = useState({ username: '', password: '' });
+  const [usernameExists, setUsernameExists] = useState();
+  const [passwordIncorrect, setPasswordIncorrect] = useState();
+  const [formSubmitted, setFormSubmitted] = useState();
+  const [APIError, setAPIError] = useState();
+  const [loading, setLoading] = useState(false);
   /* unlike in Register component, going to use Refs instead of State to track inputs, for variety's sake */
-  const router = useRouter()
+  const router = useRouter();
 
   /* set valid form inputs to true just at initial render */
   useEffect(() => {
-    setUsernameExists(true)
-    setPasswordIncorrect(false)
-    setFormSubmitted(false)
-    setAPIError(false)
-  }, [userData])
+    setUsernameExists(true);
+    setPasswordIncorrect(false);
+    setFormSubmitted(false);
+    setAPIError(false);
+  }, [userData]);
 
   /* input change handler */
   const inputChangeHandler = (e) => {
     switch (e.target.id) {
       case 'username':
-        setUserData((prevState) => ({ ...prevState, username: e.target.value }))
-        break
+        setUserData((prevState) => ({
+          ...prevState,
+          username: e.target.value,
+        }));
+        break;
       case 'password':
-        setUserData((prevState) => ({ ...prevState, password: e.target.value }))
-        break
+        setUserData((prevState) => ({
+          ...prevState,
+          password: e.target.value,
+        }));
+        break;
     }
-  }
+  };
 
   async function submitHandler(e) {
-    e.preventDefault()
-    setFormSubmitted(true)
-    let validForm = true
-    const { username, password } = userData
+    e.preventDefault();
+    setFormSubmitted(true);
+    let validForm = true;
+    const { username, password } = userData;
 
     /* username validation, same as on register */
     if (
@@ -48,8 +54,8 @@ export default function Login() {
       username.trim().length > 14 ||
       !username.match(/^[a-zA-Z0-9\-]+$/)
     ) {
-      validForm = false
-      setUsernameExists(false)
+      validForm = false;
+      setUsernameExists(false);
     }
 
     /* password validation, same as on register */
@@ -58,11 +64,11 @@ export default function Login() {
       password.trim().length < 8 ||
       !password.match(/^[a-zA-Z0-9!@#$%^&*\-]+$/)
     ) {
-      validForm = false
-      setPasswordIncorrect(true)
+      validForm = false;
+      setPasswordIncorrect(true);
     }
 
-    if (!validForm) return
+    if (!validForm) return;
 
     /* try block for logging in user */
     try {
@@ -70,39 +76,39 @@ export default function Login() {
         redirect: false,
         username: username,
         password: password,
-      })
+      });
 
       /* if database connection issue, give that feedback */
       if (result.error === 'No connection to the database') {
-        setLoading(false)
-        setAPIError(true)
-        return
+        setLoading(false);
+        setAPIError(true);
+        return;
       }
 
       /* if no username in database, give that feedback */
       if (result.error === 'No user found') {
-        setLoading(false)
-        setUsernameExists(false)
-        return
+        setLoading(false);
+        setUsernameExists(false);
+        return;
       }
 
       /* if passwords don't match, give that feedback */
       if (result.error === 'Password does not match') {
-        setLoading(false)
-        setPasswordIncorrect(true)
-        return
+        setLoading(false);
+        setPasswordIncorrect(true);
+        return;
       }
 
       if (!result.error) {
         /* as long as signIn gave us no errors, reroute user to profile */
-        setLoading(true)
+        setLoading(true);
         router.replace(`
-        /user/${username}`)
+        /user/${username}`);
       } else {
-        setAPIError(true)
+        setAPIError(true);
       }
     } catch (err) {
-      setAPIError(true)
+      setAPIError(true);
     }
   }
 
@@ -144,6 +150,9 @@ export default function Login() {
             <p>
               Don't have an account? <Link href='/register'>Create one!</Link>
             </p>
+            <p>
+              Forgot your password? <Link href='/forgot'>Got you covered!</Link>
+            </p>
             {!usernameExists && <p className='error'>Username not found.</p>}
             {passwordIncorrect && (
               <p className='error'>Password does not match record.</p>
@@ -166,5 +175,5 @@ export default function Login() {
         </Card>
       )}
     </div>
-  )
+  );
 }
