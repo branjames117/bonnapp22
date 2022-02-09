@@ -78,10 +78,11 @@ export default async function handler(req, res) {
 
     await sendEmail(mailOptions);
   } else {
-    console.log('Did not find the user');
+    client.close();
+    res.status(500).json({ message: 'Email not found!' });
+    return;
   }
 
-  res.json();
-
+  res.status(201).json({ message: 'Email sent!' });
   client.close();
 }

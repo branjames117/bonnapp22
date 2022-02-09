@@ -55,20 +55,20 @@ export default function Forgot() {
       });
 
       /* if database connection issue, give that feedback */
-      if (result.error === 'No connection to the database') {
+      if (result.status === 503) {
         setLoading(false);
         setAPIError(true);
         return;
       }
 
       /* if no email in database, give that feedback */
-      if (result.error === 'Email address not found') {
+      if (result.status === 500) {
         setLoading(false);
         setEmailExists(false);
         return;
       }
 
-      if (!result.error) {
+      if (result.status === 201) {
         /* as long as signIn gave us no errors, reroute user to profile */
         setLoading(true);
         router.replace(`/reset`);
