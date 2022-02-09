@@ -1,68 +1,90 @@
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
-import { signIn } from 'next-auth/client'
-import Card from '../layout/Card'
-import Button from '../layout/Button'
-import Link from 'next/link'
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { signIn } from 'next-auth/client';
+import Card from '../layout/Card';
+import Button from '../layout/Button';
+import Link from 'next/link';
 
-async function createUser(username, password) {
+async function createUser(email, username, password) {
   const response = await fetch('/api/auth/signup', {
     method: 'POST',
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ email, username, password }),
     headers: { 'Content-Type': 'application/json' },
-  })
-  return response.status
+  });
+  return response.status;
 }
 
 export default function Register() {
   const [userData, setUserData] = useState({
+    email: '',
     username: '',
     password: '',
     confirmed: '',
-  })
-  const [enteredUsernameIsValid, setEnteredUsernameIsValid] = useState()
-  const [usernameExists, setUsernameExists] = useState()
-  const [enteredPasswordIsValid, setEnteredPasswordIsValid] = useState()
-  const [enteredConfirmedIsValid, setEnteredConfirmedIsValid] = useState()
-  const [formSubmitted, setFormSubmitted] = useState()
-  const [APIError, setAPIError] = useState()
-  const [loading, setLoading] = useState(false)
-  const router = useRouter()
+  });
+  const [enteredEmailIsValid, setEnteredEmailIsValid] = useState();
+  const [emailExists, setEmailExists] = useState();
+  const [enteredUsernameIsValid, setEnteredUsernameIsValid] = useState();
+  const [usernameExists, setUsernameExists] = useState();
+  const [enteredPasswordIsValid, setEnteredPasswordIsValid] = useState();
+  const [enteredConfirmedIsValid, setEnteredConfirmedIsValid] = useState();
+  const [formSubmitted, setFormSubmitted] = useState();
+  const [APIError, setAPIError] = useState();
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   /* set valid form inputs to true every update for better user experience */
   useEffect(() => {
-    setEnteredUsernameIsValid(true)
-    setEnteredPasswordIsValid(true)
-    setEnteredConfirmedIsValid(true)
-    setFormSubmitted(false)
-    setUsernameExists(false)
-    setAPIError(false)
-  }, [userData])
+    setEnteredEmailIsValid(true);
+    setEnteredUsernameIsValid(true);
+    setEnteredPasswordIsValid(true);
+    setEnteredConfirmedIsValid(true);
+    setFormSubmitted(false);
+    setUsernameExists(false);
+    setAPIError(false);
+  }, [userData]);
 
   /* input change handler */
   const inputChangeHandler = (e) => {
     switch (e.target.id) {
+      case 'email':
+        setUserData((prevState) => ({ ...prevState, email: e.target.value }));
+        break;
       case 'username':
-        setUserData((prevState) => ({ ...prevState, username: e.target.value }))
-        break
+        setUserData((prevState) => ({
+          ...prevState,
+          username: e.target.value,
+        }));
+        break;
       case 'password':
-        setUserData((prevState) => ({ ...prevState, password: e.target.value }))
-        break
+        setUserData((prevState) => ({
+          ...prevState,
+          password: e.target.value,
+        }));
+        break;
       case 'confirmed':
         setUserData((prevState) => ({
           ...prevState,
           confirmed: e.target.value,
-        }))
-        break
+        }));
+        break;
     }
-  }
+  };
 
   /* form submit handler */
   async function submitHandler(e) {
-    e.preventDefault()
-    setFormSubmitted(true)
-    let validForm = true
-    const { username, password, confirmed } = userData
+    e.preventDefault();
+    setFormSubmitted(true);
+    let validForm = true;
+    const { email, username, password, confirmed } = userData;
+
+    /* email validation */
+    if (
+      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.trim()) ===
+      false
+    ) {
+      validForm = false;
+      setEnteredEmailIsValid(false);
+    }
 
     /* username validation */
     if (
@@ -71,8 +93,8 @@ export default function Register() {
       username.trim().length > 14 ||
       !username.match(/^[a-zA-Z0-9\-]+$/)
     ) {
-      validForm = false
-      setEnteredUsernameIsValid(false)
+      validForm = false;
+      setEnteredUsernameIsValid(false);
     }
 
     /* password validation */
@@ -81,34 +103,38 @@ export default function Register() {
       password.trim().length < 8 ||
       !password.match(/^[a-zA-Z0-9!@#$%^&*-]+$/)
     ) {
-      validForm = false
-      setEnteredPasswordIsValid(false)
+      validForm = false;
+      setEnteredPasswordIsValid(false);
     }
 
     /* confirmed password match validation */
     if (confirmed.trim() !== '' && password !== confirmed) {
-      validForm = false
-      setEnteredConfirmedIsValid(false)
+      validForm = false;
+      setEnteredConfirmedIsValid(false);
     }
 
     /* if any validations failed, break out of submit handler */
-    if (!validForm) return
+    if (!validForm) return;
 
     /* try block for creating user with fetch API call */
     try {
-      const result = await createUser(username, password)
-      if (result === 514) {
+      const result = await createUser(email, username, password);
+      if (result === 515) {
+        /* if API returns 515, email already exists in database */
+        setEmailExists(true);
+        return;
+      } else if (result === 514) {
         /* if API returns 514, username already exists in database */
-        setUsernameExists(true)
-        return
+        setUsernameExists(true);
+        return;
       } else if (result === 512) {
         /* if API returns 512, username failed server-side validation */
-        setEnteredUsernameIsValid(false)
-        return
+        setEnteredUsernameIsValid(false);
+        return;
       } else if (result === 513) {
         /* if API returns 513, password failed server-side validation */
-        setEnteredPasswordIsValid(false)
-        return
+        setEnteredPasswordIsValid(false);
+        return;
       } else if (result === 201) {
         /* if API returns 201, user was successfully created
         so let's go ahead and log them in */
@@ -116,21 +142,21 @@ export default function Register() {
           redirect: false,
           username,
           password,
-        })
+        });
 
         if (!result.error) {
           /* as long as signIn gave us no errors, reroute user to profile */
-          setLoading(true)
-          router.replace(`/user/${username}`)
+          setLoading(true);
+          router.replace(`/user/${username}`);
         } else {
-          setAPIError(true)
+          setAPIError(true);
         }
       } else {
         /* if API returns any other status, something unforeseen occurred! */
-        setAPIError(true)
+        setAPIError(true);
       }
     } catch (err) {
-      setAPIError(true)
+      setAPIError(true);
     }
   }
 
@@ -140,6 +166,22 @@ export default function Register() {
         <Card>
           <h2>Register User</h2>
           <form onSubmit={submitHandler}>
+            <div className='control'>
+              <label htmlFor='email'>Email</label>
+              <input
+                autoComplete='off'
+                type='email'
+                id='email'
+                name='email'
+                onChange={inputChangeHandler}
+                value={userData.email}
+                className={
+                  (formSubmitted && !enteredEmailIsValid) || emailExists
+                    ? 'controlError'
+                    : null
+                }
+              />
+            </div>
             <div className='control'>
               <label htmlFor='username'>Username</label>
               <input
@@ -191,8 +233,9 @@ export default function Register() {
               Already registered? <Link href='/login'>Login instead.</Link>
             </p>
             <p className='error'>
-              These are throwaway accounts and cannot be recovered if
-              credentials are forgotten, so remember your username and password.
+              Your email address will not be used to contact you nor will it be
+              shared with any other parties. It will only be stored in the
+              database in case you need to reset your password later.
             </p>
             {formSubmitted && APIError && (
               <p className='error'>
@@ -200,6 +243,14 @@ export default function Register() {
                 <br />
                 <br />
                 Contact the administrator. This is a real problem, dude.
+              </p>
+            )}
+            {formSubmitted && emailExists && (
+              <p className='error'>
+                <strong>Error: Email exists.</strong>
+                <br />
+                <br />
+                That email is already registered!
               </p>
             )}
             {formSubmitted && usernameExists && (
@@ -247,5 +298,5 @@ export default function Register() {
         </Card>
       )}
     </div>
-  )
+  );
 }
